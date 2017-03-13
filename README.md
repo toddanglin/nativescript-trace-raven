@@ -34,8 +34,9 @@ Then, in your app, just use trace as normal. The output will now be sent to Sent
 ```typescript
 trace.write("Something happened in the app", trace.categories.Error, trace.messageType.error);
 ```
+_NOTE: Sentry.io charges by log volume, so as a best practice, do not enable this custom TraceWriter during regular development_
 
-In addition to the trace message, this plug-in will send these additional details to Sentry:
+In addition to the trace message, this plug-in will send these additional details to Sentry with each log:
 
 - NativeScript runtime version
 - Device Platform (iOS/Android)
