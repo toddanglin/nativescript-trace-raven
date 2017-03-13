@@ -1,0 +1,14 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page">
+  <Page.actionBar>
+      <ActionBar title="Raven TraceWriter Demo" class="action-bar" />
+  </Page.actionBar>
+  <StackLayout class="p-20">
+    <Label text="Push a button to test the logging:" textWrap="true" class="body" style="margin-bottom:20;text-align:center;" />
+    <Button text="Write Log" tap="{{ btnLog }}" class="btn btn-primary" />
+    <Button text="Write Log with Crumb" tap="{{ btnLogWithCrumb }}" class="btn btn-primary" />
+    <Button text="Write Error" tap="{{ btnError }}" class="btn btn-primary" />
+    <Button text="Log Exception" tap="{{ btnException }}" class="btn btn-primary" />
+    <Label text="Open your Sentry.io dashboard to see recorded log messages. Logs should show-up within seconds of tapping buttons." 
+      textWrap="true" class="body" style="margin-top:20;text-align:center;font-style:italic;" />
+  </StackLayout>
+</Page>

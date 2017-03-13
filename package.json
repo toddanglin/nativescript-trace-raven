@@ -1,0 +1,59 @@
+{
+  "name": "nativescript-trace-raven",
+  "version": "1.0.0",
+  "description": "Custom NativeScript TraceWriter using Raven to write logs to Sentry.io",
+  "main": "trace-raven",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "android": "2.5.0",
+      "ios": "2.5.0"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo.ios": "npm run preparedemo && cd demo && tns run ios --emulator",
+    "demo.ios.device": "npm run preparedemo && cd demo && tns run ios",
+    "demo.android": "npm run preparedemo && cd demo && tns run android --emulator",
+    "test.ios": "cd demo && tns test ios --emulator",
+    "test.ios.device": "cd demo && tns test ios",
+    "test.android": "cd demo && tns test android",
+    "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-trace-raven && tns plugin add .. && tns install",
+    "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toddanglin/nativescript-trace-raven.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "Android",
+    "iOS",
+    "Sentry",
+    "Raven",
+    "logging"
+  ],
+  "author": {
+    "name": "Todd Anglin",
+    "email": "toddanglin@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/toddanglin/nativescript-trace-raven/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/toddanglin/nativescript-trace-raven",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "tns-core-modules": "^2.5.1",
+    "tns-platform-declarations": "^2.5.0",
+    "typescript": "^2.1.0",
+    "prompt": "^1.0.0",
+    "rimraf": "^2.5.0"
+  },
+  "dependencies": {
+    "nativescript-appversion": "^1.3.3",
+    "nativescript-orientation": "^1.5.5",
+    "raven-js": "^3.12.1"
+  }
+}
