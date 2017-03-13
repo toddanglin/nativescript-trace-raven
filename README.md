@@ -1,18 +1,18 @@
 # NativeScript Raven TraceWriter
 
-This plug-in provides a custom NativeScript TraceWriter that will log messages to Sentry.io using the [Raven.js JavaScript library](https://www.npmjs.com/package/raven-js).
+This plug-in provides a custom NativeScript TraceWriter that will log messages to Sentry.io using the [Raven.js JavaScript library](https://www.npmjs.com/package/raven-js). This is useful for capturing trace messages in production from user iOS and Android devices.
 
 ## Getting started
 
-To use this plug-in, you must first obtain a "DSN" key from [Sentry.io](https://sentry.io/welcome/). This key is used to initialize the plug-in and send logs to your specific Sentry.io account.
-
-To add the plug-in to your project:
+To add the plug-in to a NativeScript project:
 
 `tns plugin add nativescript-trace-raven`
 
+NOTE: To use this plug-in, a "DSN" key from [Sentry.io](https://sentry.io/welcome/) is required. This key is used to initialize the plug-in and send logs to a specific Sentry.io project.
+
 ## Usage
 
-Once the plug-in is installed, you need to simply initialize the new TraceWriter. This can be done in different ways, but for easy global usage, setup the new TraceWriter when your app starts:
+Once the plug-in is installed, simply initialize the new TraceWriter. This can be done in different ways, but for easy global usage, setup the new TraceWriter when then app starts:
 
 **app.ts**
 ```typescript
@@ -28,14 +28,14 @@ app.on(app.launchEvent, (args: app.ApplicationEventData) => {
     trace.enable();
 });
 ```
-Then, in your app, just use trace as normal and the output will be sent to Sentry.io.
+Then, in your app, just use trace as normal. The output will now be sent to Sentry.io.
 
 **Example:**
 ```typescript
 trace.write("Something happened in the app", trace.categories.Error, trace.messageType.error);
 ```
 
-In addition to your trace message, this plug-in will auto-log these additional details to Sentry:
+In addition to the trace message, this plug-in will send these additional details to Sentry:
 
 - NativeScript runtime version
 - Device Platform (iOS/Android)
@@ -51,7 +51,7 @@ In addition to your trace message, this plug-in will auto-log these additional d
 - User IP Address
 
 ### Log level
-Sentry.io provides three levels for classifying logs: info, warning and error.
+Sentry.io provides three levels for classifying logs: `info`, `warning` and `error`.
 
 When logging using the TraceWriter and `trace` API, the `trace.messageType` is mapped to Sentry log levels:
 
@@ -71,10 +71,10 @@ trace.addWriter(new TraceRaven(sentryDsn, "production"));
 ```
 
 ### Additional Raven APIs
-The default TraceWriter API only provides a `write` method, but the Raven.js library provides additional capabilities such as logging exception detail. To use these additional APIs, you can directly use the Raven library. As long as you've initialized `TraceRaven` on app startup, all Raven configuration will be set. To learn more about the Raven APIs, [visit the JavaScript docs on Sentry.io](https://docs.sentry.io/clients/javascript/usage/).
+The default TraceWriter API only provides a `write` method, but the Raven.js library provides additional capabilities such as logging exception detail. To use these additional APIs, you can directly use the Raven library. As long as you've initialized `TraceRaven` on app startup, all Raven configuration will be set and does not need to be re-initialized. To learn more about the Raven APIs, [visit the JavaScript docs on Sentry.io](https://docs.sentry.io/clients/javascript/usage/).
 
 #### Logging Exceptions
-Unlike using `trace` to write record an Error, the `captureException` API will also attempt to include Stack Trace information with the log.
+Unlike using `trace` to record an Error, the `Raven.captureException` API will also attempt to include Stack Trace information with the log.
 ```typescript
 import Raven = require("raven-js");
 
@@ -85,7 +85,7 @@ try {
 }
 ```
 
-#### Adding Breadcrumb
+#### Adding Breadcrumbs
 You can manually create "breadcrumbs" that will be included with Sentry logs. Breadcrumbs are intended to show the path of actions that lead to an exception, app crash or log message. For example, to add a crumb when a button is tapped:
 
 ```typescript
@@ -111,11 +111,11 @@ let eventId = Raven.lastEventId();
 ```
 
 ## Considerations
-Sentry.io provides a generous free tier for logging events, but does eventually charge by logging volume. As a result, you want to be careful to log only events that are helpful for troubleshooting in production.
+Sentry.io provides a generous free tier for logging events, but does eventually charge by logging volume. As a result, be careful to log only events that are helpful for troubleshooting in production.
 
-**That means you do not want to use `trace.categories.All` when logging to Sentry**
+**That means: do not use `trace.categories.All` when logging to Sentry**
 
-This verbose logging will likely generate far more logs than you need, and quickly run-up your Sentry.io bill.
+This verbose logging will likely generate far more logs than needed, and quickly run-up your Sentry.io bill.
 
 Best practices:
 
@@ -123,7 +123,7 @@ Best practices:
 2. Minimize the `trace` categories logged (minimum: `trace.categories.Error`)
 
 ### Native Errors
-Since this plug-in is running in the NativeScript JavaScript layer, it may not capture all native iOS or Android errors. This is generally okay as you will get errors that relate to your app code, but if you need logging at the native iOS/Android level, you'll need to use a different plug-in.
+Since this plug-in is running in the NativeScript JavaScript layer, it may not capture all native iOS or Android errors. This is generally okay as errors that relate to app code will be caught, but if native iOS/Android logging is needed, use a different plug-in.
 
 ## Auto Breadcrumbs
 In addition to providing the custom TraceWriter, this plugin will automatically wire-up automatic breadcrumbs for these global `Page` events:
@@ -132,16 +132,16 @@ In addition to providing the custom TraceWriter, this plugin will automatically 
 - `onLoaded`
 - `onShownModally`
 
-Whenever one of these events occurs, a new breadcrumb will get added to the history. To disable this behavior, initialize `TraceWriter` with an additional parameter:
+Whenever one of these events occurs, a new breadcrumb will get added to the history. To disable this behavior, initialize `TraceRaven` with an additional parameter:
 
 ```typescript
-new TraceWriter("[YOUR DSN KEY]", "production", false)
+new TraceRaven("[YOUR DSN KEY]", "production", false)
 ```
 
 The last parameter will enable/disable auto-breadcrumbs created by this plug-in. Default is `true` (enabled).
 
 ## Using the Demo
-If you would just like to try the demo for this plug-in, simply follow these steps:
+To try the demo for this plug-in, simply follow these steps:
 
 1. Get a DSN key from Sentry.io
 2. Clone this repo
@@ -150,7 +150,7 @@ If you would just like to try the demo for this plug-in, simply follow these ste
 5. Navigate back to the root of the cloned repo
 6. Run `npm run demo.ios` or `npm run demo.android`
 
-If you do not add your DSN key before running the demo, the app will crash on launch.
+If the DSN key is not added before running the demo, the app will crash on launch.
 
 ## Known Issues
 
