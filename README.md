@@ -160,6 +160,7 @@ If the DSN key is not added before running the demo, the app will crash on launc
 
 ## Contributing
 Want to help make this plug-in better? Report issues in GitHub:
-https://github.com/toddanglin/nativescript-trace-raven/pulls
+
+https://github.com/toddanglin/nativescript-trace-raven/issues
 
 Pull requests welcome.
