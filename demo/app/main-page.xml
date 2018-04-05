@@ -8,6 +8,7 @@
     <Button text="Write Log with Crumb" tap="{{ btnLogWithCrumb }}" class="btn btn-primary" />
     <Button text="Write Error" tap="{{ btnError }}" class="btn btn-primary" />
     <Button text="Log Exception" tap="{{ btnException }}" class="btn btn-primary" />
+    <Button text="Crash App (Uncaugh Exception Test)" tap="{{ btnCrashApp }}" class="btn btn-primary" />
     <Label text="Open your Sentry.io dashboard to see recorded log messages. Logs should show-up within seconds of tapping buttons." 
       textWrap="true" class="body" style="margin-top:20;text-align:center;font-style:italic;" />
   </StackLayout>

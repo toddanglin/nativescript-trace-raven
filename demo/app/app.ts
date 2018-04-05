@@ -1,5 +1,6 @@
-﻿import * as app from 'application';
+import * as app from 'application';
 import * as trace from 'trace';
+import Raven = require("raven-js");
 import { TraceRaven } from 'nativescript-trace-raven';
 import { alert } from 'ui/dialogs';
 
@@ -17,6 +18,18 @@ app.on(app.launchEvent, (args: app.ApplicationEventData) => {
     // trace.clearWriters();
     trace.addWriter(new TraceRaven(sentryDsn, "demo"));
     trace.enable();
+});
+
+app.on(app.uncaughtErrorEvent, (args: app.ApplicationEventData) => {
+    if (app.android) {
+        console.log("** Android Error Detected **");
+        // For Android applications, args.android is an NativeScriptError.
+        Raven.captureException(args.android);
+    } else if (app.ios) {
+        console.log("** iOS Error Detected **");
+        // For iOS applications, args.ios is NativeScriptError.
+        Raven.captureException(args.ios);
+    }
 });
 
 app.start({ moduleName: "main-page" });

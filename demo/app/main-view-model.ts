@@ -2,6 +2,7 @@ import { Observable, EventData } from 'data/observable';
 import Raven = require("raven-js");
 import * as trace from "trace";
 import { Button } from "ui/button";
+import { GridLayout } from "ui/layouts/grid-layout";
 
 export class HelloWorldModel extends Observable {
 
@@ -37,6 +38,11 @@ export class HelloWorldModel extends Observable {
     } catch (error) {
       Raven.captureException(error);
     }
+  }
+
+  public btnCrashApp() {
+    // throw new Error("An UNCAUGHT EXCEPTION test from the demo app");
+    var btn = new ios.widget.Button();
   }
 
   private writeMessage(message: string, category: string, type: number) {
