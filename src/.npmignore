@@ -1,5 +1,6 @@
 demo/
 screenshots/
+
 *.gif
 *.png
 *.log
@@ -7,3 +8,6 @@ screenshots/
 *.ts
 !*.d.ts
 tsconfig.json
+references.d.ts
+
+.vscode

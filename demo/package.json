@@ -1,30 +1,31 @@
 {
   "nativescript": {
-    "id": "com.htmlui.ns-trace-raven",
+    "id": "com.htmlui.nstraceraven",
     "tns-ios": {
-      "version": "2.5.0"
+      "version": "3.4.1"
     },
     "tns-android": {
-      "version": "2.5.0"
+      "version": "3.4.2"
     }
   },
   "dependencies": {
-    "nativescript-theme-core": "^1.0.2",
-    "nativescript-trace-raven": "file:///Users/toddanglin/Documents/git/ns-trace-raven",
+    "nativescript-theme-core": "^1.0.4",
+    "nativescript-trace-raven": "../src",
     "nativescript-unit-test-runner": "^0.3.4",
-    "tns-core-modules": "^2.5.1"
+    "raven-js": "^3.24.0",
+    "tns-core-modules": "^3.4.1"
   },
   "devDependencies": {
-    "babel-traverse": "6.12.0",
-    "babel-types": "6.11.1",
-    "babylon": "6.8.4",
-    "filewalker": "0.1.2",
-    "jasmine-core": "^2.5.2",
-    "karma": "^1.3.0",
-    "karma-jasmine": "^1.0.2",
+    "babel-traverse": "6.26.0",
+    "babel-types": "6.26.0",
+    "babylon": "6.18.0",
+    "filewalker": "0.1.3",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.0",
+    "karma-jasmine": "^1.1.1",
     "karma-nativescript-launcher": "^0.4.0",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "^0.3.7",
-    "typescript": "^2.1.0"
+    "nativescript-dev-typescript": "^0.6.0",
+    "typescript": "^2.8.1"
   }
 }

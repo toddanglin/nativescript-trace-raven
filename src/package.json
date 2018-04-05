@@ -1,0 +1,67 @@
+{
+  "name": "nativescript-trace-raven",
+  "version": "1.1.0",
+  "description": "Custom NativeScript TraceWriter using Raven to write logs to Sentry.io",
+  "main": "trace-raven",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "android": "3.4.2",
+      "ios": "3.4.1"
+    }
+  },
+  "scripts": {
+    "tsc": "tsc -skipLibCheck",
+    "build": "npm i && npm run tsc",
+    "setup": "npm run build && cd ../demo && npm i",
+    "postclone": "npm i && cd ../demo && npm i && cd ../src && npm run plugin.link",
+    "test.android": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build android && tns test android --justlaunch",
+    "test.ios": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build ios && tns test ios --justlaunch",
+    "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
+    "plugin.link": "npm link && cd ../demo && npm link nativescript-trace-raven && cd ../src",
+    "plugin.tscwatch": "npm run tsc -- -w",
+    "demo.ios": "npm i && npm run tsc && cd ../demo && tns run ios --emulator --syncAllFiles",
+    "demo.android": "npm i && npm run tsc && cd ../demo && tns run android --syncAllFiles",
+    "demo.reset": "cd ../demo && rimraf platforms",
+    "plugin.prepare": "npm run tsc && cd ../demo && tns plugin remove nativescript-trace-raven && tns plugin add ../src",
+    "clean": "cd ../demo && rimraf hooks node_modules platforms && cd ../src && rimraf node_modules && npm run plugin.link",
+    "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/typings/**'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toddanglin/nativescript-trace-raven.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "Android",
+    "iOS",
+    "Sentry",
+    "Raven",
+    "logging"
+  ],
+  "author": {
+    "name": "Todd Anglin",
+    "email": "toddanglin@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/toddanglin/nativescript-trace-raven/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/toddanglin/nativescript-trace-raven",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "tns-core-modules": "^3.4.1",
+    "tns-platform-declarations": "^3.4.1",
+    "typescript": "^2.8.1",
+    "prompt": "^1.0.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "nativescript-appversion": "^1.4.1",
+    "nativescript-orientation": "^2.2.0",
+    "nativescript-globalevents": "^1.2.1",
+    "nativescript-dom": "^2.0.0",
+    "raven-js": "^3.24.0"
+  }
+}

@@ -12,6 +12,8 @@ let appversion = require("nativescript-appversion");
 let orientation = require('nativescript-orientation');
 require("nativescript-globalevents");
 
+declare var global: any;
+
 export class TraceRaven {
   private batteryPercent: number;
 
@@ -34,7 +36,7 @@ export class TraceRaven {
     }
 
     // Add category as a tag for log
-    Raven.captureMessage(message, { level: level, tags: { trace_category: category } });
+    Raven.captureMessage(message, { level: <Raven.LogLevel>level, tags: { trace_category: category } });
   }
 
   private initRaven(dsn: string, environment: string, enableAppBreadcrumbs: boolean) {
@@ -92,7 +94,7 @@ export class TraceRaven {
             .catch((err) => {
               let msg = `Raven Transport Error: ${err}`;
               console.warn(msg);
-              options.onFailure();
+              options.onError(err);
             });
         },
       })

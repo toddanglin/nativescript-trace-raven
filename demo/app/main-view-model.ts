@@ -4,6 +4,8 @@ import * as trace from "trace";
 import { Button } from "ui/button";
 import { GridLayout } from "ui/layouts/grid-layout";
 
+declare var ios: any;
+
 export class HelloWorldModel extends Observable {
 
   constructor() {
