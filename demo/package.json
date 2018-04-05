@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.demo",
+    "id": "com.htmlui.ns-trace-raven",
     "tns-ios": {
       "version": "2.5.0"
     },
